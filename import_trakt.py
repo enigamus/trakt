@@ -149,7 +149,7 @@ def read_config(options):
 
 def read_csv(options):
         """Read CSV of Movies or TVShows IDs and return a dict"""
-        reader = csv.DictReader(options.input, delimiter=',')
+        reader = csv.DictReader(options.input, delimiter=options.delimiter)
         return list(reader)
 
 def api_auth(options, config=None, refresh=False):
@@ -363,6 +363,9 @@ def main():
         parser.add_argument('-f', '--format',
                       help='allow to overwrite default ID type format, default %(default)s',
                       choices=['imdb', 'tmdb', 'tvdb', 'tvrage', 'trakt'], dest='format', default='imdb')
+        parser.add_argument('--delimiter',
+                        help='specify delimiter for CSV parsing, default is ","',
+                        dest='delimiter', default=',')
         parser.add_argument('-t', '--type',
                       help='allow to overwrite type, default %(default)s',
                       choices=['movies', 'shows', 'episodes'], dest='type', default='movies')
