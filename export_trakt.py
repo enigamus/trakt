@@ -156,7 +156,7 @@ def write_csv(options, results):
                 results = sorted_results
         # Write result CSV, works with windows now
         with open(options.output, 'w', encoding = 'utf-8', newline='') as fp:
-                mycsv = csv.DictWriter(fp, fieldnames=list(results[0].keys()), delimiter=options.delimiter, quoting=csv.QUOTE_ALL)
+                mycsv = csv.DictWriter(fp, fieldnames=list(results[0].keys()), delimiter=options.delimiter, quoting=csv.QUOTE_MINIMAL)
                 mycsv.writeheader()
                 for row in results:
                     mycsv.writerow(row)
@@ -486,7 +486,6 @@ def main():
                 options.format == "imdb":
                 find_dupids.append(data[options.type[:-1]]['ids']['imdb'])
                 export_csv.append({ 'imdb' : data[options.type[:-1]]['ids']['imdb'],
-                                    'trakt' : data[options.type[:-1]]['ids']['trakt'],
                                     options.time : data[options.time],
                                     'title' : data[options.type[:-1]]['title']})
             # If movie or show export by format tmdb
@@ -494,7 +493,6 @@ def main():
                 options.format == "tmdb":
                 find_dupids.append(data[options.type[:-1]]['ids']['tmdb'])
                 export_csv.append({ 'tmdb' : data[options.type[:-1]]['ids']['tmdb'],
-                                    'trakt' : data[options.type[:-1]]['ids']['trakt'],
                                     options.time : data[options.time],
                                     'title' : data[options.type[:-1]]['title']})
             # If episode export by format tmdb
@@ -503,11 +501,9 @@ def main():
                 find_dupids.append(data[options.type[:-1]]['ids']['tmdb'])
                 if not data['episode']['title']: data['episode']['title'] = "no episode title"
                 export_csv.append({ 'tmdb' : data[options.type[:-1]]['ids']['tmdb'],
-                                    'trakt' : data[options.type[:-1]]['ids']['trakt'],
                                     options.time : data[options.time],
                                     'season' : data[options.type[:-1]]['season'],
                                     'episode' : data[options.type[:-1]]['number'],
-                                    'episode_title' : data['episode']['title'],
                                     'show_title' : data['show']['title']})
             # If episode export by format tvdb
             elif 'tvdb' in data[options.type[:-1]]['ids'] and \
@@ -515,11 +511,9 @@ def main():
                 find_dupids.append(data[options.type[:-1]]['ids']['tvdb'])
                 if not data['episode']['title']: data['episode']['title'] = "no episode title"
                 export_csv.append({ 'tvdb' : data[options.type[:-1]]['ids']['tvdb'],
-                                    'trakt' : data[options.type[:-1]]['ids']['trakt'],
                                     options.time : data[options.time],
                                     'season' : data[options.type[:-1]]['season'],
                                     'episode' : data[options.type[:-1]]['number'],
-                                    'episode_title' : data['episode']['title'],
                                     'show_title' : data['show']['title']})
         # print(export_csv)
         if len(export_csv) == 0:
