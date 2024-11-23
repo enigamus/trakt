@@ -156,7 +156,7 @@ def write_csv(options, results):
                 results = sorted_results
         # Write result CSV, works with windows now
         with open(options.output, 'w', encoding = 'utf-8', newline='') as fp:
-                mycsv = csv.DictWriter(fp, fieldnames=list(results[0].keys()), quoting=csv.QUOTE_ALL)
+                mycsv = csv.DictWriter(fp, fieldnames=list(results[0].keys()), delimiter=options.delimiter, quoting=csv.QUOTE_ALL)
                 mycsv.writeheader()
                 for row in results:
                     mycsv.writerow(row)
@@ -339,6 +339,9 @@ def main():
         parser.add_argument('-f', '--format',
                       help='allow to overwrite default ID type format, default %(default)s',
                       choices=['imdb', 'tmdb', 'tvdb', 'tvrage', 'trakt'], dest='format', default='imdb')
+        parser.add_argument('--delimiter', 
+                        help='specify delimiter for CSV writing, default is ","',
+                        dest='delimiter', default=',')
         parser.add_argument('-t', '--type',
                       help='allow to overwrite type, default %(default)s',
                       choices=['movies', 'shows', 'episodes'], dest='type', default='movies')

@@ -20,6 +20,7 @@ Refer to [README.md](README.md#configuration) for details.
 ```text
 usage: export_trakt.py [-h] [-v] [-c CONFIG] [-o [OUTPUT]]
                        [-f {imdb,tmdb,tvdb,tvrage,trakt}]
+                       [--delimiter DELIMITER]
                        [-t {movies,shows,episodes}]
                        [-l {watchlist,collection,history}] [-u USERLIST]
                        [--listid LISTID] [-C] [-D] [-s {asc,desc}] [-V]
@@ -38,6 +39,8 @@ options:
   -f {imdb,tmdb,tvdb,tvrage,trakt}, --format {imdb,tmdb,tvdb,tvrage,trakt}
                         allow to overwrite default ID type format, default
                         imdb
+  --delimiter DELIMITER
+                        specify delimiter for CSV writing, default is ","
   -t {movies,shows,episodes}, --type {movies,shows,episodes}
                         allow to overwrite type, default movies
   -l {watchlist,collection,history}, --list {watchlist,collection,history}
